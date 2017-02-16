@@ -1,0 +1,785 @@
+/*!
+ * Start Bootstrap - Stylish Portfolio (http://startbootstrap.com/)
+ * Copyright 2013-2016 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
+ */
+
+/* Global Styles */
+
+html, body, div, span, applet, object, iframe, 
+h1, h2, h3, h4, h5, h6, p, blockquote, pre, 
+a, abbr, acronym, address, big, cite, code, 
+del, dfn, em, img, ins, kbd, q, s, samp, 
+small, strike, strong, sub, sup, tt, var, 
+b, u, i, center, 
+dl, dt, dd, ol, ul, li, 
+fieldset, form, label, legend, 
+table, caption, tbody, tfoot, thead, tr, th, td, 
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary, 
+time, mark, audio, video { 
+    margin: 0; 
+    padding: 0; 
+} 
+html, body {height:100%;} 
+input {outline:none; vertical-align:middle;} 
+input:focus, select:focus, textarea:focus, a {outline:none;} 
+li {list-style-type:none;} 
+img {border:0 none;} 
+
+.clearfix:after {content: "."; display: block; clear: both; visibility: hidden; line-height: 0; height: 0;} 
+.clearfix {display: inline-block;} 
+html[xmlns] .clearfix {display: block;} 
+* html .clearfix {height: 1%;} 
+.clear {clear:both;} 
+
+
+body {
+    font-family: "Source Sans Pro","Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    background-color: #f7f8fa;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.message-container {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.message {
+    padding: 0 20px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+/* Header */
+
+.header {
+    display: table;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: #f7f8fa url("../img/casa-poporului.png") no-repeat center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.header input {
+    margin-bottom: 20px;
+    height: 53px;
+    border: 0;
+}
+
+.about {
+    padding: 70px 0;
+}
+
+.header h1 {
+    margin: 0;
+    padding: 0;
+    font-size: 8.5em;
+    font-weight: 900;
+    color: #fff;
+}
+
+.header h3 {
+    margin: 0;
+    font-size: 3.5em;
+    font-weight: 500;
+    color: #fff;
+    padding-bottom: 40px;
+}
+
+.sal-net {
+    max-width: 400px;
+    font-size: 1.714em;
+}
+
+
+/* Custom Button Styles */
+.main-btn {
+    max-width: 400px; 
+    font-size: 2.429em; 
+    background-color: #e7513c;
+    color: #fff;
+    width: 100%;
+    transition: all 0.3s ease 0s;
+    padding: 5px 12px;
+}
+.main-btn:hover, .main-btn:focus {
+    background-color: #de4d39;
+    color: #fff;
+}
+
+.btn-dark {
+    border-radius: 0;
+    color: #fff;
+    background-color: #232a34;
+}
+
+.btn-dark:hover,
+.btn-dark:focus,
+.btn-dark:active {
+    color: #fff;
+    background-color: #181f29;
+}
+
+.btn-light {
+    border-radius: 0;
+    color: #333;
+    background-color: rgb(255,255,255);
+}
+
+.btn-light:hover,
+.btn-light:focus,
+.btn-light:active {
+    color: #333;
+    background-color: rgba(255,255,255,0.8);
+}
+
+/* Custom Horizontal Rule */
+
+hr.small {
+    max-width: 100px;
+}
+
+/* Side Menu */
+
+#sidebar-wrapper {
+    z-index: 1000;
+    position: fixed;
+    right: 0;
+    width: 250px;
+    height: 100%;
+    transform: translateX(250px);
+    overflow-y: auto;
+    background: #222;
+    -webkit-transition: all 0.4s ease 0s;
+    -moz-transition: all 0.4s ease 0s;
+    -ms-transition: all 0.4s ease 0s;
+    -o-transition: all 0.4s ease 0s;
+    transition: all 0.4s ease 0s;
+}
+
+.sidebar-nav {
+    position: absolute;
+    top: 0;
+    width: 250px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sidebar-nav li {
+    text-indent: 20px;
+    line-height: 40px;
+}
+
+.sidebar-nav li a {
+    display: block;
+    text-decoration: none;
+    color: #999;
+}
+
+.sidebar-nav li a:hover {
+    text-decoration: none;
+    color: #fff;
+    background: rgba(255,255,255,0.2);
+}
+
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+    text-decoration: none;
+}
+
+.sidebar-nav > .sidebar-brand {
+    height: 55px;
+    font-size: 18px;
+    line-height: 55px;
+}
+
+.sidebar-nav > .sidebar-brand a {
+    color: #999;
+}
+
+.sidebar-nav > .sidebar-brand a:hover {
+    color: #fff;
+    background: none;
+}
+
+#menu-toggle {
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    right: 0;
+}
+
+#sidebar-wrapper.active {
+    right: 250px;
+    width: 250px;
+    -webkit-transition: all 0.4s ease 0s;
+    -moz-transition: all 0.4s ease 0s;
+    -ms-transition: all 0.4s ease 0s;
+    -o-transition: all 0.4s ease 0s;
+    transition: all 0.4s ease 0s;
+}
+
+.toggle {
+    margin: 5px 5px 0 0;
+}
+
+/* Services */
+
+.services {
+    padding: 50px 0;
+    background-color: #232a34;
+}
+
+.service-item {
+    margin-bottom: 30px;
+}
+
+.service-item h2, .service-item img {
+    display: inline-block;
+}
+
+.service-item img {
+    vertical-align: top;
+    margin-top: 24px;
+}
+
+.amount {
+    background-color: #e74f4f;
+}
+.amount p:first-child {
+    font-size: 2.286em;
+}
+.amount p:nth-child(2) {
+    font-size: 1.857em;
+}
+.amount span {
+    font-size: 1.938em;
+}
+
+.assumption-container {
+    background-color: #12a0b1;
+    color: #fff;
+    font-size: 15px;
+}
+
+.assumption {
+    border: 2px solid #12a0b1;
+    padding: 20px;
+}
+
+.assumption span.ipoteza-descriere {
+    border-bottom: 2px solid #f6bb19;
+}
+
+.assumption p {
+    line-height: 25px;
+}
+
+.total-number span {
+    font-size: 75px;
+}
+
+.remaining-money span, .money-to-state span {
+    font-size: 45px;
+}
+
+.remaining-money h2 {
+    border-bottom: 2px solid #12a0b1;
+    display: inline-block;
+}
+
+.money-to-state h2 {
+    border-bottom: 2px solid #ff644b;
+    display: inline-block;
+}
+
+.remaining-money p, .money-to-state p {
+    font-size: 20px;
+}
+
+.remaining-money {
+    border-right: 1px dotted #6e6e6e;
+}
+
+/* Callout */
+
+.callout {
+    display: table;
+    width: 100%;
+    height: 300px;
+    color: #fff;
+    background:
+        linear-gradient(
+        rgba(10,5,10, .5), 
+        rgba(10,5,10, .5)),
+        url(../img/colectiv_small.jpg) no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+.taxe {
+    display: table;
+    width: 80%;
+    height: 80%;
+    color: #fff;
+    background: url(../img/taxe.png) no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+}
+
+.diagram {
+    padding: 40px 0;
+}
+
+.proc-taxe {
+    background-color: #12a0b1;
+}
+.proc-taxe p:first-child {
+    font-size: 2.286em;
+}
+/*.proc-taxe p:first-child span {*/
+    /*font-size: 1.938em;*/
+/*}*/
+.proc-taxe p:nth-child(2) {
+    font-size: 1.857em;
+}
+.proc-taxe p:nth-child(2) span {
+    font-size: 2.385em;
+}
+
+.graphic-small-resolution {
+    display: none;
+}
+
+
+/* Portfolio */
+.portfolio {
+    padding: 50px 0 20px;
+}
+.portfolio-item {
+    margin-bottom: 30px;
+}
+.img-portfolio {
+    margin: 0 auto;
+}
+
+
+/* Call to Action */
+.call-to-action {
+    padding: 50px 0;
+}
+.call-to-action .btn {
+    margin: 10px;
+}
+
+.incentive {
+    background-color: #eba91c;
+}
+.incentive p:first-child {
+    font-size: 2.286em;
+}
+.incentive p:nth-child(2) {
+    font-size: 2.286em;
+}
+.incentive p:nth-child(2) span:nth-of-type(1) {
+    font-size: 1.563em;
+}
+.incentive p:nth-child(2) span:nth-of-type(2) {
+    font-size: 1em;
+}
+.incentive .cta-share {
+    font-size: 1.857em;
+    padding-bottom: 20px;
+}
+.incentive p:nth-child(3) span {
+    font-size: 1.231em;
+}
+
+
+/* Map */
+.map {
+    height: 500px;
+}
+
+.map iframe {
+    pointer-events: none;
+}
+
+/* Footer */
+footer {
+    padding: 30px 0;
+}
+
+#to-top {
+    display: none;
+    position: fixed;
+    bottom: 5px;
+    right: 5px;
+}
+
+#share-buttons img {
+    width: 35px;
+    padding: 5px;
+    border: 0;
+    box-shadow: 0;
+    display: inline;
+}
+
+/* Popup homepage */
+
+.main-content {
+    visibility: hidden;
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+}
+
+.loaded .main-content {
+    visibility: visible;
+    opacity: 1;
+    height: auto;
+}
+
+.not-verified-popout {
+    background-color: rgba(35, 42, 52, 0.95);
+    color: #fff;
+    padding: 50px;
+    text-align: center;
+    border-radius: 5px;
+
+    width: 100%;
+    max-width: 700px;
+
+    position: absolute;
+    z-index: 9;
+    top: 50%;
+    left: 50%;
+
+    transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+
+    transition: all 0.15s ease-in-out;
+    -moz-transition: all 0.15s ease-in-out;
+    -webkit-transition: all 0.15s ease-in-out;
+
+    opacity: 0;
+    visibility: hidden;
+}
+
+.not-verified .not-verified-popout {
+    opacity: 1;
+    visibility: visible;
+}
+
+.close-button {
+    display: block;
+    padding: 9px 12px;
+    text-align: center;
+    border-radius: 50%;
+    color: #000;
+    background-color: #fff;
+    position: absolute;
+    right: -10px;
+    top: -10px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.close-button .fa-close {
+    font-size: 20px;
+}
+
+
+/* Media queries */
+
+@media (max-width: 767px) {
+    body {
+        font-size: 12px;
+    }
+    .map {
+        height: 75%;
+    }
+    .header h1 {
+        font-size: 7em;
+    }
+    .header h3 {
+        font-size: 3em;
+    } 
+    .not-verified-popout {
+        max-width: 90%;
+    }
+    .highcharts-title {
+        font-size: 2em !important;
+    }
+    .sursa-chart {
+        text-align: center !important;
+        margin-right: 7.1% !important;
+    }
+}
+
+@media (max-width: 560px) {
+    .header h1 {
+        font-size: 5em;
+    }
+    .header h3 {
+        font-size: 2.5em;
+        padding-bottom: 30px;
+    } 
+    .graphic-large-resolution {
+        display: none;
+    }
+    .graphic-small-resolution {
+        display: block;
+    }
+    .drilldown li {
+        width:90% !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .col-xxs-12 {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .money-division {
+        display: block;
+    }
+}
+
+@media (max-width: 415px) {
+    .header h1 {
+        font-size: 3.5em;
+    } 
+    .header h3 {
+        font-size: 2em;
+    } 
+}
+.ipoteza {
+    font-size:13px;
+}
+#taxeAscunse .container {
+    padding: 100px 0 100px 0;
+}
+#taxeAscunse img {
+    height:100px;
+    margin-bottom: 12%;
+}
+#taxeAscunse .cwell {
+    min-height:330px;
+    margin: 13px;
+    padding: 2em;
+    border-radius:50%;
+    border:10px solid rgb(18, 160, 177);
+    max-width: 330px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+#taxeAscunse .cwell p {
+    font-size:1.2em;
+    /*margin-top: -19px;*/
+    width: 100%;
+}
+.link-sursa a,
+.link-sursa a:link,
+.link-sursa a:hover{
+    color:white;
+}
+.sursa {
+    color:darkred;
+}
+
+#tabel-cheltuieli-header {
+    background-color: #232a34;
+}
+
+#tabel-buget-header {
+    background-color:#eba91c;
+}
+
+#tabel-buget thead,
+#tabel-buget tbody tr td:first-child{
+    font-weight: bold;
+}
+
+#tabel-buget tbody tr:first-child{
+    background-color:rgba(18,160,177,0.6);
+}
+#tabel-buget{
+    font-size: 1.3em;
+}
+.Treant .collapsed .collapse-switch {
+    background:transparent !important;
+}
+.Treant .collapse-switch {
+    width:106% !important;
+    height:106% !important;
+    border: none !important;
+}
+.Treant > .node {
+    padding: 9px;
+    background:lightgray;
+    border-radius:15px;
+    background-color:#52c4d2;
+    box-shadow: 2px 2px 0 lightgrey;
+}
+#container_2 {
+    height:auto !important;
+}
+#proc_taxe .link-cta a,
+#proc_taxe .link-cta a:link,
+#proc_taxe .link-cta a:hover {
+    text-decoration: none;
+    color:inherit;
+}
+#proc_taxe .link-cta {
+    font-size:1.4em;
+}
+
+#proc_taxe .link-cta a {
+    font-weight:bold;
+}
+.drilldown {
+    overflow: hidden;
+    font-size:1.3em;
+    text-align:center;
+}
+.drilldown a {
+    cursor: pointer;
+}
+.drilldown .list-item {
+    color:inherit;
+    padding: 13px;
+    display: block;
+}
+.drilldown a:after {
+    content:' »';
+    color:inherit;
+}
+.drilldown-sub {
+    display: none;
+}
+.drilldown .drilldown-back a:after {
+    content: '';
+}
+.drilldown .drilldown-back a:before {
+    content: '« '
+}
+.drilldown li {
+    background: #12a0b1;
+    /*padding: 13px;*/
+    padding: 0px;
+    border-radius: 20px;
+    width: 20%;
+    margin: 30px auto 30px auto;
+    color:white;
+}
+.drilldown .drilldown-back {
+    background:#79d0da;
+}
+#taxe-drilldown-container {
+    transition:height 0.2s ease;
+    text-align:center;
+    margin:0 auto 30px;
+}
+#sume span.mention {
+    font-size:0.6em;
+}
+#taxeAscunse strong {
+    font-size:2em;
+}
+#proc_taxe {
+    background-color:#e74f4f;
+}
+#about-header {
+    background-color: #e74f4f;
+}
+#cta-container {
+    background-color:#eba91c;
+}
+.section-header {
+    font-size: 2.286em;
+}
+#taxe_colectate p:first-child{
+    font-size:0.9em;
+    margin-bottom:1em;
+}
+.input-container {
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    max-width: 400px;
+}
+#buton {
+    display: block;
+    margin:auto;
+}
+.highcharts-drillup-button {
+    margin-right:10px;
+}
+.section-header span strong {
+    font-size:1.5em;
+}
+.wake-up {
+    font-size:2.286em;
+}
+.remaining-money p.small {
+    font-size:12px;
+}
+.remaining-money a {
+    color:inherit;
+}
+.cwell span.small {
+    width: 86%;
+}
+.sursa-chart {
+    font-size: 0.6em;
+    text-align: right;
+    margin-right: 7.2%;
+}
+#taxe-drilldown-container .list-head {
+    background: #12a0b1;
+    padding: 13px;
+    border-radius: 20px;
+    margin: 30px auto 10px;
+    color:white;
+    font-size: 1.3em;
+}
+#taxe-drilldown-container .list-item {
+    font-size:1.1em;
+}
+.disclaimer {
+    margin-top: 1em;
+    color: #b3b3b3;
+}
+#cta-container {
+    padding:50px 0 0;
+}
+.more-info {
+    text-align: center;
+    font-size: 13px;
+    margin: 0.3em;
+}
