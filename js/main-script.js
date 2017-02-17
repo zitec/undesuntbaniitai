@@ -1,93 +1,60 @@
-var formIsValid = false;
+
 $(function () {
-
-
-    var msg = {
-        "empty":"Te rugăm să completezi câmpul!",
-        "minValue":"Salariul minim este de 1065 lei",
-        "numbersOnly":"Te rugăm să introduci o valoare numerică"
+    function View(ctx){
+        this.context = ctx;
+        this.errorElement = $(".not-verified-popout");
+        this.element =  $("#sal_net");
+    }
+    View.prototype.context = null;
+    View.prototype.setActions = function(){
+        var _this = this;
+        $('#buton').on('click', function(){
+            _this.context.submitFormAction(_this.element.val());
+        });
+        this.element.keypress(function (e) {
+            if (e.which === 13) {
+                _this.context.submitFormAction(_this.element.val());
+            }
+        });
+        $("#to-top").click(function(){
+            $("body").animate({"scrollTop":"0"},1000);
+        });
+        $('.close-button').click(function(){
+            _this.resetError();
+        });
     };
-    var salariuMinim = 1065;
-
-    function validate(input){
-        var error, errorMsg, emptyRegex = /^\s*$/;
-        if(emptyRegex.test(input)){
-            error = true;
-            errorMsg = msg.empty;
-        } else if(isNaN(input)){
-            error = true;
-            errorMsg = msg.numbersOnly;
-        } else if(input < salariuMinim){
-            error= true;
-            errorMsg = msg.minValue;
-        } else {
-            error = false;
-            errorMsg = null;
-        }
-        formIsValid = !error;
-        return {
-            "error":error,
-            "errorMsg":errorMsg
-        };
-    }
-
-    function calculare(input){
-        var salariuNet = input;
-        var rezultate = {
-            "salariuNet": salariuNet,
-            "valoareCreata": parseInt((salariuNet / 0.5702)),
-            "contributieStat": parseFloat((salariuNet / 0.5702 * 0.43).toFixed(0)),
-            "sanatate": parseFloat((salariuNet / 0.7014 * 0.107).toFixed(0)),
-            "pensiiStat": parseFloat((salariuNet / 0.7014 * 0.263).toFixed(0)),
-            "impozitVenit": parseFloat((salariuNet / 0.7014 * 0.1336).toFixed(0)),
-            "alteTaxe": parseFloat((salariuNet / 0.7014 * 0.025).toFixed(0)),
-            "valoareRamasa": parseFloat((salariuNet * (1 - 1/0.7014 * 0.62 * 0.14)).toFixed(0)),
-            "tva": parseFloat((salariuNet * 1/0.7014 * 0.62 * 0.14).toFixed(0)),
-            "pensiiStatAngajat": parseFloat((salariuNet/0.7014*0.055).toFixed(0)),
-            "pensiiStatAngajator": parseFloat((salariuNet/0.7014*0.158).toFixed(0)),
-            "sanatateAngajat":parseFloat((salariuNet/0.7014*0.055).toFixed(0)),
-            "sanatateAngajator":parseFloat((salariuNet/0.7014*0.052).toFixed(0)),
-            "alteTaxeAngajat":parseFloat((salariuNet/0.7014*0.005).toFixed(0)),
-            "alteTaxeAngajator":parseFloat((salariuNet/0.7014*0.02).toFixed(0))
-        };
-        return rezultate;
-    }
-
-    function showError(msg){
+    View.prototype.showError = function(msg){
         $('body').addClass('not-verified');
-        $(".not-verified-popout").find(".msg").text(msg);
-        $('.not-verified-popout').show();
-    }
+        this.errorElement.find(".msg").text(msg);
+        this.errorElement.show();
+    };
+    View.prototype.resetError = function(msg){
+        $('body').removeClass('not-verified');
+        this.errorElement.find(".msg").text("");
+        this.errorElement.hide();
+    };
 
-    function submitForm(){
-        var element =  $("#sal_net");
-        var input = parseInt(element.val(),10);
-        var formValidation = validate(input);
-        if(formValidation.error){
-            showError(formValidation.errorMsg);
-        } else {
-            var rezultate = calculare(input);
-            $('body').removeClass('not-verified');
-            initCharts(rezultate);
-            setLabels(rezultate);
-            $('body').addClass('loaded');
-            // $(".drilldown").drilldown({speed:300});
-            $('html,body').animate({
-                scrollTop: $(".details").offset().top
-            }, 1000);
-            return false;
-        }
-    }
-    function setLabels(rezultate){
-        var statContrib = parseInt(rezultate.pensiiStat + rezultate.sanatate + rezultate.impozitVenit + rezultate.alteTaxe);
-        var total = statContrib + rezultate.salariuNet;
-        var valoareRamasa = parseInt(rezultate.valoareRamasa);
-        var statTotal = parseInt(rezultate.contributieStat + rezultate.tva);
+    View.prototype.displayCharts = function(results){
+        this.initCharts(results);
+        this.setLabels(results);
+
+        $('body').addClass('loaded');
+        $('html,body').animate({
+            scrollTop: $(".details").offset().top
+        }, 1000);
+    };
+
+    View.prototype.setLabels = function(results) {
+        var statContrib = parseInt(results.pensiiStat + results.sanatate + results.impozitVenit + results.alteTaxe);
+        var total = statContrib + results.netIncome;
+        var valoareRamasa = parseInt(results.valoareRamasa);
+        var statTotal = parseInt(results.contributieStat + results.tva);
         $("#sorin_number").text(valoareRamasa);
         $("#stat_number").text(statTotal);
-        $("#total_number").text(parseInt(rezultate.valoareCreata));
-    }
-    function initCharts(dataSet){
+        $("#total_number").text(parseInt(results.valoareCreata));
+    };
+
+    View.prototype.initEmployeeChart = function(dataSet){
         var colors = {
             "pensii":"#F1A094",
             "sanatate":"#A58C98",
@@ -98,15 +65,7 @@ $(function () {
             "rest":"#09b998",
             "vicii":"#A2A9B0",
             "alte":"#CBD5D1",
-        };
-
-        Highcharts.setOptions({
-            lang: {
-                drillUpText: "◁ Înapoi"
-            }
-        });
-
-        chartOptions2 = {
+        };chartOptions2 = {
             chart: {
                 renderTo: 'container_2',
                 backgroundColor: '#f7f8fa',
@@ -174,14 +133,16 @@ $(function () {
         chart2 = new Highcharts.Chart(chartOptions2);
         chart2.redraw();
 
+    };
 
+    View.prototype.initBudgetChart = function(){
         var chart_bugete_options = {
             chart: {
                 renderTo: "tabel_buget_container",
                 backgroundColor: '#f7f8fa',
                 plotBorderWidth: null,
                 plotShadow: false,
-                type: 'pie',
+                type: 'pie'
             },
             exporting: { enabled: false },
             title: {
@@ -264,38 +225,24 @@ $(function () {
 
         var chart_bugete = new Highcharts.Chart(chart_bugete_options);
         chart_bugete.redraw();
-    }
+    };
 
-    $(document).ready(function () {
-
-        // Closes the sidebar menu
-        $("#menu-close").click(function (e) {
-            e.preventDefault();
-            $("#sidebar-wrapper").toggleClass("active");
+    View.prototype.initCharts = function (dataSet){
+        Highcharts.setOptions({
+            lang: {
+                drillUpText: "◁ Înapoi"
+            }
         });
+        this.initEmployeeChart(dataSet);
+        this.initBudgetChart();
+    };
 
-        // Opens the sidebar menu
-        $("#menu-toggle").click(function (e) {
-            e.preventDefault();
-            $("#sidebar-wrapper").toggleClass("active");
-        });
-
-        // Scrolls to the selected menu item on the page
-        $('a[href*=#]:not([href=#],[data-toggle],[data-target],[data-slide])').click(function () {
-            return false;
-        });
-
-        $("#to-top").click(function(){
-            $("body").animate({"scrollTop":"0"},1000);
-        });
-
-        //#to-top button appears after scrolling
+    View.prototype.initTopButton = function(){
         var fixed = false;
         $(document).scroll(function () {
             if ($(this).scrollTop() > 250) {
                 if (!fixed) {
                     fixed = true;
-                    // $('#to-top').css({position:'fixed', display:'block'});
                     $('#to-top').show("slow", function () {
                         $('#to-top').css({
                             position: 'fixed',
@@ -314,28 +261,95 @@ $(function () {
                 }
             }
         });
+    };
 
 
-        $('#buton').on('click', submitForm);
 
-        $('#sal_net').keypress(function (e) {
-            if (e.which === 13) {
-                $('#buton').trigger('click');
-            }
-        });
+    function Validator(){}
+    Validator.prototype.error = null;
+    Validator.prototype.validate = function(input){
+        var value = input.trim();
+        this.error = null;
+        if(typeof value === "undefine" || value === null || value === ""){
+            this.error = Validator.msg.empty;
+        } else if(isNaN(value)){
+            this.error = Validator.msg.numbersOnly;
+        } else if(parseInt(value, 10) < Validator.minimumWage){
+            this.error = Validator.msg.minValue;
+        }
+        return this.error === null;
+    };
+    Validator.prototype.getMessage = function(input){
+        return this.error;
+    };
+    Validator.msg = {
+        "empty":"Te rugăm să completezi câmpul!",
+        "minValue":"Salariul minim este de 1065 lei",
+        "numbersOnly":"Te rugăm să introduci o valoare numerică"
+    };
+    Validator.minimumWage = 1065;
 
-        $('.close-button').click(function(){
-            $(this).parent('.not-verified-popout').hide();
-        });
 
-        $(document).on('click', function(event){
-            var container = $(".not-verified-popout");
-            if (!container.is(event.target) &&
-                container.has(event.target).length === 0)
-            {
-                $(container).hide();
-            }
-        });
+    function Entity(){}
+    Entity.prototype.precision = 10000;
+    Entity.prototype.results = null;
+    Entity.prototype.setValue = function(input){
+        this.input = input;
+        this.results = {};
+        this.calculate();
+    };
+    Entity.prototype.calculate = function(){
+        var precisionGrossIncome, precisionPow, netIncome = this.input;
+        this.grossIncome = parseInt((netIncome * this.precision) / (0.7014 * this.precision) * this.precision) / this.precision;
+        precisionGrossIncome = this.grossIncome * this.precision;
+        precisionPow = Math.pow(this.precision, 2);
+        this.results.netIncome =  netIncome;
+        this.results.valoareCreata = Math.round((netIncome * this.precision) / (0.5702 * this.precision));
+        this.results.contributieStat = Math.round((this.results.valoareCreata * this.precision) * (0.43 * this.precision) / precisionPow);
+        this.results.sanatate = Math.round(precisionGrossIncome * (0.107 * this.precision) / precisionPow);
+        this.results.pensiiStat = Math.round(precisionGrossIncome * (0.263 * this.precision) / precisionPow);
+        this.results.impozitVenit = Math.round(precisionGrossIncome * (0.1336 * this.precision) / precisionPow);
+        this.results.alteTaxe = Math.round(precisionGrossIncome * (0.025 * this.precision) / precisionPow);
+        this.results.consum = parseFloat((precisionGrossIncome * (0.62 * this.precision) / precisionPow).toFixed(("" + this.precision).length - 1));
+        this.results.tva = Math.round(((this.results.consum * this.precision) * (0.14 * this.precision)) / precisionPow);
+        this.results.valoareRamasa = Math.round(precisionGrossIncome * (0.6146 * this.precision) / precisionPow);
+        this.results.pensiiStatAngajat = Math.round(precisionGrossIncome * (0.055 * this.precision) / precisionPow);
+        this.results.pensiiStatAngajator = Math.round(precisionGrossIncome * (0.158 * this.precision) / precisionPow);
+        this.results.sanatateAngajat = Math.round(precisionGrossIncome * (0.055 * this.precision) / precisionPow);
+        this.results.sanatateAngajator = Math.round(precisionGrossIncome * (0.052 * this.precision) / precisionPow);
+        this.results.alteTaxeAngajat = Math.round(precisionGrossIncome * (0.005 * this.precision) / precisionPow);
+        this.results.alteTaxeAngajator = Math.round(precisionGrossIncome * (0.02 * this.precision) / precisionPow);
+    };
+    Entity.prototype.toJSON = function(){
+        return this.results;
+    };
+
+
+    function Controller(){
+        this.view = new View(this);
+        this.validator = new Validator();
+        this.entity = new Entity();
+    }
+
+    Controller.prototype.indexAction = function(){
+        this.view.setActions();
+        this.view.initTopButton();
+    };
+
+    Controller.prototype.submitFormAction = function(input){
+        var isValid = this.validator.validate(input);
+        this.view.resetError();
+        if(!isValid){
+            this.view.showError(this.validator.getMessage());
+            return false;
+        }
+        this.entity.setValue(parseInt(input, 10));
+        this.view.displayCharts(this.entity.toJSON());
+    };
+
+    $(document).ready(function () {
+        var page = new Controller();
+        page.indexAction();
     });
 
 });
