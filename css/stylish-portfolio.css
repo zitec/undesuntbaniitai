@@ -431,6 +431,11 @@ footer {
     position: fixed;
     bottom: 5px;
     right: 5px;
+    transition: bottom 0.2s ease;
+}
+
+#to-top.bottom {
+    bottom: 190px;
 }
 
 #share-buttons img {
@@ -782,4 +787,7 @@ footer {
     text-align: center;
     font-size: 13px;
     margin: 0.3em;
+}
+.chart-legend {
+    min-width:120px;
 }

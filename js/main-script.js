@@ -22,6 +22,18 @@ $(function () {
         $('.close-button').click(function(){
             _this.resetError();
         });
+
+        $(window).on("scroll", function(){
+           if(($(window).scrollTop() + $(window).height() > $(document).height() - 100)){
+               if(!$("#to-top").hasClass("bottom")){
+                   $("#to-top").addClass("bottom");
+               }
+           } else {
+               if($("#to-top").hasClass("bottom")){
+                   $("#to-top").removeClass("bottom");
+               }
+           }
+        });
     };
     View.prototype.showError = function(msg){
         $('body').addClass('not-verified');
@@ -65,13 +77,18 @@ $(function () {
             "rest":"#09b998",
             "vicii":"#A2A9B0",
             "alte":"#CBD5D1",
-        };chartOptions2 = {
+        };
+        chartOptions2 = {
             chart: {
                 renderTo: 'container_2',
                 backgroundColor: '#f7f8fa',
                 plotBorderWidth: null,
                 plotShadow: false,
                 type: 'pie'
+            },
+            legend: {
+                align: 'center',
+                itemWidth:140
             },
             exporting: { enabled: false },
             title: {
@@ -313,7 +330,7 @@ $(function () {
         this.results.consum = parseFloat((precisionGrossIncome * (0.62 * this.precision) / precisionPow).toFixed(("" + this.precision).length - 1));
         this.results.tva = Math.round(((this.results.consum * this.precision) * (0.14 * this.precision)) / precisionPow);
         this.results.valoareRamasa = Math.round(precisionGrossIncome * (0.6146 * this.precision) / precisionPow);
-        this.results.pensiiStatAngajat = Math.round(precisionGrossIncome * (0.055 * this.precision) / precisionPow);
+        this.results.pensiiStatAngajat = Math.round(precisionGrossIncome * (0.105 * this.precision) / precisionPow);
         this.results.pensiiStatAngajator = Math.round(precisionGrossIncome * (0.158 * this.precision) / precisionPow);
         this.results.sanatateAngajat = Math.round(precisionGrossIncome * (0.055 * this.precision) / precisionPow);
         this.results.sanatateAngajator = Math.round(precisionGrossIncome * (0.052 * this.precision) / precisionPow);
