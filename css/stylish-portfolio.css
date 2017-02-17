@@ -434,8 +434,10 @@ footer {
     transition: bottom 0.2s ease;
 }
 
-#to-top.bottom {
-    bottom: 190px;
+@media (max-width: 767px) {
+    #to-top.bottom {
+        bottom:190px;
+    }
 }
 
 #share-buttons img {
