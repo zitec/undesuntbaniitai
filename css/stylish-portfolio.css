@@ -255,6 +255,9 @@ hr.small {
     vertical-align: top;
     margin-top: 24px;
 }
+.service-item p {
+    font-size:22px;
+}
 
 .amount {
     background-color: #e74f4f;
@@ -353,9 +356,6 @@ hr.small {
 .proc-taxe p:first-child {
     font-size: 2.286em;
 }
-/*.proc-taxe p:first-child span {*/
-    /*font-size: 1.938em;*/
-/*}*/
 .proc-taxe p:nth-child(2) {
     font-size: 1.857em;
 }
@@ -622,7 +622,7 @@ footer {
     background-color: #232a34;
 }
 
-#tabel-buget-header {
+#chart-buget-header {
     background-color:#eba91c;
 }
 

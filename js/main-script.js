@@ -52,7 +52,7 @@ $(function () {
 
         $('body').addClass('loaded');
         $('html,body').animate({
-            scrollTop: $(".details").offset().top
+            scrollTop: $(".main-content").offset().top
         }, 1000);
     };
 
@@ -61,7 +61,7 @@ $(function () {
         var total = statContrib + results.netIncome;
         var valoareRamasa = parseInt(results.valoareRamasa);
         var statTotal = parseInt(results.contributieStat + results.tva);
-        $("#sorin_number").text(valoareRamasa);
+        $("#money-division").text(valoareRamasa);
         $("#stat_number").text(statTotal);
         $("#total_number").text(parseInt(results.valoareCreata));
     };
@@ -155,7 +155,7 @@ $(function () {
     View.prototype.initBudgetChart = function(){
         var chart_bugete_options = {
             chart: {
-                renderTo: "tabel_buget_container",
+                renderTo: "chart_buget_container",
                 backgroundColor: '#f7f8fa',
                 plotBorderWidth: null,
                 plotShadow: false,
