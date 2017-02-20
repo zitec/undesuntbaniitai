@@ -165,6 +165,13 @@ $(function () {
             title: {
                 text: null
             },
+            legend: {
+                align: 'center',
+                itemWidth:390,
+                itemStyle: {
+                    fontSize:'0.9em'
+                }
+            },
             tooltip: {
                 pointFormat: '<b>{point.y} milioane'
             },
@@ -224,15 +231,14 @@ $(function () {
                     {
                         id:"altele",
                         data: [
-                            {name:"Impozitul pe comerțul exterior și tranzacțiile internaționale (taxe vamale)",y:882.7,color:"#A20021"},
+                            {name:"Impozitul pe comerțul exterior și tranzacțiile internaționale",y:882.7,color:"#A20021"},
                             {name:"Alte impozite și taxe fiscale",y:716.7,color:"#F79D5C"},
                             {name:"Venituri nefiscale",y:17938.30,color:"#009B72"},
                             {name:"Venituri din capital",y:769.4,color:"#B6C649"},
                             {name:"Donații",y:1.6,color:"#2C4251"},
-                            {name:"Sume primite de la UE în contul plăților efectuate și prefinanțare",y:949.9,color:"#C1C1C1"},
+                            {name:"Sume primite de la UE",y:949.9,color:"#C1C1C1"},
                             {name:"Sume încasate în contul unic (bugetul de stat)",y:472.7,color:"#70A288"},
-                            {name:"Alte sume primite de la UE pentru programele operaționale finanțate în cadrul obiectivului convergență",y:0,color:"#04395E"},
-                            {name:"Sume primite de la UE/alți donatori în contul plăților efectuate și prefinanțări aferente cadrului financiar 2014-2020",y:5909.6,color:"#DAB785"}
+                            {name:"Sume primite de la UE/alți donatori",y:5909.6,color:"#DAB785"}
                         ]
                     }
                 ]
